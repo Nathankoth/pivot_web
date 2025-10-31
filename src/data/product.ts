@@ -1,0 +1,11 @@
+import productImage from "@/assets/product-square.jpg";
+
+export const pivotGuardProduct = {
+  sku: "PG-STD-BLK",
+  title: "Pivot Guard — Standard Black",
+  price: 15000,
+  description: "31\" training stick — 15.5\" padded guard (5\" diameter), 15.5\" foam handle (1.5\" thick).",
+  features: ["15.5\" padded guard (5\" diameter)", "Anti-slip foam handle", "Coach-tested"],
+  image: productImage,
+};
+

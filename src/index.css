@@ -9,15 +9,15 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 210 16% 8%;
+    --foreground: 211 28% 16%;
 
-    --card: 210 17% 98%;
-    --card-foreground: 210 16% 8%;
+    --card: 210 25% 98%;
+    --card-foreground: 211 28% 16%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 210 16% 8%;
 
-    --primary: 210 100% 7%;
+    --primary: 211 53% 9%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 17% 96%;
@@ -26,22 +26,22 @@ All colors MUST be HSL.
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 41 100% 50%;
-    --accent-foreground: 210 100% 7%;
+    --accent: 42 100% 50%;
+    --accent-foreground: 211 53% 9%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 41 100% 50%;
+    --ring: 42 100% 50%;
 
     --radius: 0.5rem;
 
     /* Custom Pivot Guard tokens */
-    --hero-gradient-start: 210 100% 7%;
-    --hero-gradient-end: 210 80% 12%;
-    --subtle-gradient: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(210 90% 10%) 100%);
+    --hero-gradient-start: 211 53% 9%;
+    --hero-gradient-end: 211 44% 14%;
+    --subtle-gradient: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(211 44% 14%) 100%);
     --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
     --hover-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.1);
     --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,8 +66,8 @@ All colors MUST be HSL.
     --muted: 210 50% 15%;
     --muted-foreground: 220 9% 65%;
 
-    --accent: 41 100% 50%;
-    --accent-foreground: 210 100% 7%;
+    --accent: 42 100% 50%;
+    --accent-foreground: 211 53% 9%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
@@ -98,6 +98,6 @@ All colors MUST be HSL.
   }
 
   .container-custom {
-    @apply mx-auto max-w-[1200px] px-6;
+    @apply mx-auto max-w-[1200px] px-5;
   }
 }

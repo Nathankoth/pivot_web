@@ -1,57 +1,119 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import productImage from "@/assets/product-square.jpg";
+import { useToast } from "@/components/ui/use-toast";
+import { useCart } from "@/hooks/use-cart";
+import { formatCurrency } from "@/lib/utils";
+import { pivotGuardProduct } from "@/data/product";
 
 const ProductCard = () => {
+  const [quantity, setQuantity] = useState(1);
+  const { addItem } = useCart();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const product = pivotGuardProduct;
+
+  const increment = () => setQuantity((prev) => Math.min(10, prev + 1));
+  const decrement = () => setQuantity((prev) => Math.max(1, prev - 1));
+
+  const handleAddToCart = () => {
+    addItem(
+      {
+        sku: product.sku,
+        title: product.title,
+        price: product.price,
+        priceDisplay: formatCurrency(product.price),
+        image: product.image,
+      },
+      quantity,
+    );
+
+    toast({
+      title: "Added to cart",
+      description: `${quantity} × ${product.title} added to your cart.`,
+    });
+  };
+
+  const handleBuyNow = () => {
+    navigate(`/buy-now?sku=${product.sku}&qty=${quantity}`);
+  };
+
   return (
-    <section id="shop" className="py-12 md:py-20">
+    <section id="shop" aria-labelledby="product-card" className="scroll-mt-24">
       <div className="container-custom">
-        <Card className="max-w-3xl mx-auto shadow-hover hover-lift">
+        <Card className="mx-auto max-w-4xl border border-border bg-card shadow-card">
           <CardContent className="p-6 md:p-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="aspect-square rounded-lg overflow-hidden bg-secondary">
+            <div className="grid gap-8 md:grid-cols-2">
+              <div className="relative overflow-hidden rounded-lg bg-secondary">
                 <img
-                  src={productImage}
-                  alt="Pivot Guard Standard Black - 31 inch training stick"
-                  className="w-full h-full object-cover"
+                  src={product.image}
+                  alt="Pivot Guard product photograph"
+                  className="h-full w-full object-cover"
                   loading="lazy"
                 />
               </div>
-              
-              <div className="flex flex-col justify-between space-y-6">
+
+              <div className="flex flex-col gap-6">
                 <div className="space-y-4">
-                  <div>
-                    <Badge variant="secondary" className="mb-2">
-                      PG-STD-BLK
-                    </Badge>
-                    <h2 className="text-2xl md:text-3xl font-headline font-bold">
-                      Pivot Guard — Standard Black
-                    </h2>
-                  </div>
-                  
-                  <p className="text-muted-foreground">
-                    31" training stick — 15.5" padded guard (5" diameter), 15.5" foam handle (1.5" thick).
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">Coach-tested</Badge>
-                    <Badge variant="outline">Glossy vinyl pad</Badge>
-                    <Badge variant="outline">Anti-slip foam handle</Badge>
-                  </div>
-                  
-                  <p className="text-3xl font-headline font-bold">
-                    ₦15,000
+                  <Badge variant="secondary" className="text-xs uppercase tracking-wide">
+                    {product.sku}
+                  </Badge>
+                  <h2 id="product-card" className="text-3xl font-headline font-bold text-primary md:text-4xl">
+                    {product.title}
+                  </h2>
+                  <p className="text-base text-muted-foreground">{product.description}</p>
+                  <ul className="space-y-2 text-sm text-foreground/80">
+                    {product.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-3xl font-headline font-semibold text-primary">
+                    {formatCurrency(product.price)}
                   </p>
                 </div>
-                
-                <div className="space-y-3">
-                  <Button className="w-full" size="lg">
-                    Add to cart
-                  </Button>
-                  <Button className="w-full" variant="outline" size="lg">
-                    Buy now
-                  </Button>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-medium text-muted-foreground">Quantity</span>
+                    <div className="inline-flex items-center rounded-full border border-border bg-background">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Decrease quantity"
+                        onClick={decrement}
+                        disabled={quantity === 1}
+                      >
+                        -
+                      </Button>
+                      <span className="min-w-[2rem] text-center text-sm font-semibold text-primary">{quantity}</span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Increase quantity"
+                        onClick={increment}
+                        disabled={quantity === 10}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button className="flex-1" size="lg" onClick={handleAddToCart}>
+                      Add to cart
+                    </Button>
+                    <Button className="flex-1" size="lg" variant="outline" onClick={handleBuyNow}>
+                      Buy now
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

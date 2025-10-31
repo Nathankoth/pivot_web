@@ -1,43 +1,49 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import martialArtsImage from "@/assets/action-martial-arts.jpg";
 import basketballImage from "@/assets/action-basketball.jpg";
 
 const ActionGallery = () => {
   return (
-    <section id="drills" className="py-12 md:py-20 bg-card">
-      <div className="container-custom">
-        <div className="text-center mb-12 space-y-4">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold">
+    <section aria-labelledby="action-gallery-heading" className="bg-background py-12">
+      <div className="container-custom space-y-8">
+        <div className="space-y-3 text-center">
+          <h2 id="action-gallery-heading" className="text-3xl font-headline font-bold text-primary">
             Built for real training
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            From martial arts dojos to basketball courts — coaches trust Pivot Guard for realistic contact drills.
+          <p className="mx-auto max-w-2xl text-base text-muted-foreground">
+            Two core drills to start: simulate contact safely for martial arts and basketball/flag football sessions.
           </p>
         </div>
-        
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="relative aspect-video rounded-lg overflow-hidden hover-lift">
+
+        <div className="grid gap-3 md:grid-cols-2">
+          <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
               src={martialArtsImage}
-              alt="Martial arts training with Pivot Guard stick"
-              className="w-full h-full object-cover"
+              alt="Martial Arts: control & impact drills"
+              className="h-full w-full object-cover"
               loading="lazy"
             />
-          </div>
-          
-          <div className="relative aspect-video rounded-lg overflow-hidden hover-lift">
+            <figcaption className="px-4 py-3 text-sm text-muted-foreground">
+              Martial Arts: control & impact drills
+            </figcaption>
+          </figure>
+          <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
               src={basketballImage}
-              alt="Basketball training drill with Pivot Guard"
-              className="w-full h-full object-cover"
+              alt="Basketball/Flag Football: simulate contact"
+              className="h-full w-full object-cover"
               loading="lazy"
             />
-          </div>
+            <figcaption className="px-4 py-3 text-sm text-muted-foreground">
+              Basketball/Flag Football: simulate contact
+            </figcaption>
+          </figure>
         </div>
-        
+
         <div className="text-center">
-          <Button variant="outline" size="lg">
-            See drills & videos
+          <Button asChild variant="outline" size="lg">
+            <Link to="/drills">See drills & videos</Link>
           </Button>
         </div>
       </div>
