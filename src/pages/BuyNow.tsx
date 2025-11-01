@@ -58,6 +58,15 @@ const BuyNow = () => {
             <div className="flex flex-1 flex-col gap-2">
               <h3 className="text-lg font-semibold text-primary">{product.title}</h3>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">SKU: {product.sku}</p>
+              {product.originalPrice && (
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="line-through">{formatCurrency(product.originalPrice)}</span>
+                  <span className="font-semibold uppercase tracking-wide text-accent">Limited offer</span>
+                </div>
+              )}
+              <div className="text-base font-semibold text-primary">
+                {formatCurrency(product.price)} each
+              </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <span>Quantity</span>
                 <Input
@@ -132,7 +141,14 @@ const BuyNow = () => {
             <dl className="space-y-2 text-sm">
               <div className="flex items-center justify-between">
                 <dt>{product.title}</dt>
-                <dd>{formatCurrency(product.price)} × {quantity}</dd>
+                <dd className="text-right">
+                  {product.originalPrice && (
+                    <span className="mr-2 text-xs text-muted-foreground line-through">
+                      {formatCurrency(product.originalPrice)}
+                    </span>
+                  )}
+                  <span>{formatCurrency(product.price)} × {quantity}</span>
+                </dd>
               </div>
               <div className="flex items-center justify-between font-semibold text-primary">
                 <dt>Total due</dt>

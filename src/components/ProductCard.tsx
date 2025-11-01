@@ -25,6 +25,7 @@ const ProductCard = () => {
         sku: product.sku,
         title: product.title,
         price: product.price,
+        originalPrice: product.originalPrice,
         priceDisplay: formatCurrency(product.price),
         image: product.image,
       },
@@ -73,9 +74,17 @@ const ProductCard = () => {
                       </li>
                     ))}
                   </ul>
-                  <p className="text-3xl font-headline font-semibold text-primary">
-                    {formatCurrency(product.price)}
-                  </p>
+                  <div className="space-y-1">
+                    {product.originalPrice && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="line-through">{formatCurrency(product.originalPrice)}</span>
+                        <span className="font-semibold uppercase tracking-wide text-accent">Limited offer</span>
+                      </div>
+                    )}
+                    <p className="text-3xl font-headline font-semibold text-primary">
+                      {formatCurrency(product.price)}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="space-y-4">

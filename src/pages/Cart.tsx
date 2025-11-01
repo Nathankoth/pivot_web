@@ -66,7 +66,11 @@ const Cart = () => {
 
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="text-sm text-muted-foreground">
-                      {formatCurrency(item.price)} each
+                      {item.originalPrice && (
+                        <span className="mr-2 line-through">{formatCurrency(item.originalPrice)}</span>
+                      )}
+                      <span>{formatCurrency(item.price)} each</span>
+                      {item.originalPrice && <span className="ml-2 text-xs font-semibold uppercase text-accent">Limited offer</span>}
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="inline-flex items-center rounded-full border border-border bg-background">
