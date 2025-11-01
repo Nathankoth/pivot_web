@@ -31,7 +31,7 @@ const Hero = () => {
               Free returns • Local shipping • Coach-approved
             </p>
             <p className="text-sm font-semibold text-accent">
-              Limited offer: ₦55,000 (was ₦70,000)
+              Limited offer: ₦55,000 — Save ₦15,000 (21% OFF)
             </p>
           </div>
 

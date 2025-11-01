@@ -8,6 +8,12 @@ const Cart = () => {
   const { items, updateQuantity, removeItem, getCartTotals } = useCart();
   const navigate = useNavigate();
   const { subtotal, itemCount } = getCartTotals();
+  const totalSavings = items.reduce((acc, item) => {
+    if (item.originalPrice) {
+      return acc + (item.originalPrice - item.price) * item.quantity;
+    }
+    return acc;
+  }, 0);
 
   if (items.length === 0) {
     return (
@@ -65,12 +71,23 @@ const Cart = () => {
                   </div>
 
                   <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="text-sm text-muted-foreground">
-                      {item.originalPrice && (
-                        <span className="mr-2 line-through">{formatCurrency(item.originalPrice)}</span>
-                      )}
-                      <span>{formatCurrency(item.price)} each</span>
-                      {item.originalPrice && <span className="ml-2 text-xs font-semibold uppercase text-accent">Limited offer</span>}
+                    <div className="space-y-1 text-sm text-muted-foreground">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {item.originalPrice && (
+                          <span className="line-through">{formatCurrency(item.originalPrice)}</span>
+                        )}
+                        <span className="text-base font-semibold text-primary">{formatCurrency(item.price)} each</span>
+                        {item.originalPrice ? (
+                          <span className="ml-1 rounded-md bg-accent px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+                            {`${Math.round((1 - item.price / item.originalPrice) * 100)}% OFF`}
+                          </span>
+                        ) : null}
+                      </div>
+                      {item.originalPrice ? (
+                        <p className="text-xs text-muted-foreground">
+                          Save {formatCurrency(item.originalPrice - item.price)} per item
+                        </p>
+                      ) : null}
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="inline-flex items-center rounded-full border border-border bg-background">
@@ -117,6 +134,12 @@ const Cart = () => {
                 <dt className="text-muted-foreground">Subtotal</dt>
                 <dd className="font-semibold text-primary">{formatCurrency(subtotal)}</dd>
               </div>
+              {totalSavings > 0 ? (
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <dt>Savings</dt>
+                  <dd>{formatCurrency(totalSavings)}</dd>
+                </div>
+              ) : null}
               <div className="flex items-start justify-between gap-2">
                 <dt className="text-muted-foreground">Shipping estimate</dt>
                 <dd className="max-w-[220px] text-right text-xs text-muted-foreground">

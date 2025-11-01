@@ -26,6 +26,9 @@ const BuyNow = () => {
 
   const [quantity, setQuantity] = useState(initialQuantity);
   const [method, setMethod] = useState(paymentMethods[0].id);
+  const savings = product.originalPrice ? product.originalPrice - product.price : null;
+  const discountPercent = product.originalPrice && product.originalPrice > 0 ? Math.round((1 - product.price / product.originalPrice) * 100) : null;
+  const savingsText = savings ? `Save ${formatCurrency(savings)} per item` : null;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,18 +58,25 @@ const BuyNow = () => {
               className="h-32 w-32 rounded-md object-cover"
               loading="lazy"
             />
-            <div className="flex flex-1 flex-col gap-2">
+              <div className="flex flex-1 flex-col gap-2">
               <h3 className="text-lg font-semibold text-primary">{product.title}</h3>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">SKU: {product.sku}</p>
-              {product.originalPrice && (
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span className="line-through">{formatCurrency(product.originalPrice)}</span>
-                  <span className="font-semibold uppercase tracking-wide text-accent">Limited offer</span>
-                </div>
-              )}
-              <div className="text-base font-semibold text-primary">
-                {formatCurrency(product.price)} each
-              </div>
+                {product.originalPrice ? (
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-center gap-3 text-sm">
+                      <span className="text-muted-foreground line-through">{formatCurrency(product.originalPrice)}</span>
+                      <span className="text-base font-semibold text-primary">{formatCurrency(product.price)} each</span>
+                      {discountPercent ? (
+                        <span className="rounded-md bg-accent px-2 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+                          {`${discountPercent}% OFF`}
+                        </span>
+                      ) : null}
+                    </div>
+                    {savingsText ? <p className="text-xs text-muted-foreground">{savingsText}</p> : null}
+                  </div>
+                ) : (
+                  <div className="text-base font-semibold text-primary">{formatCurrency(product.price)} each</div>
+                )}
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <span>Quantity</span>
                 <Input
@@ -150,6 +160,12 @@ const BuyNow = () => {
                   <span>{formatCurrency(product.price)} × {quantity}</span>
                 </dd>
               </div>
+              {savings ? (
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <dt>Savings</dt>
+                  <dd>{formatCurrency(savings * quantity)}</dd>
+                </div>
+              ) : null}
               <div className="flex items-center justify-between font-semibold text-primary">
                 <dt>Total due</dt>
                 <dd>{formatCurrency(product.price * quantity)}</dd>

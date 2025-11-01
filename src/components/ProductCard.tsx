@@ -15,6 +15,10 @@ const ProductCard = () => {
   const navigate = useNavigate();
 
   const product = pivotGuardProduct;
+  const savings = product.originalPrice ? product.originalPrice - product.price : null;
+  const discountPercent = product.originalPrice && product.originalPrice > 0 ? Math.round((1 - product.price / product.originalPrice) * 100) : null;
+  const badgeText = product.pricingDisplay?.badgeText ?? (discountPercent ? `${discountPercent}% OFF` : null);
+  const savingsText = product.pricingDisplay?.savingsText ?? (savings ? `Save ${formatCurrency(savings)}` : null);
 
   const increment = () => setQuantity((prev) => Math.min(10, prev + 1));
   const decrement = () => setQuantity((prev) => Math.max(1, prev - 1));
@@ -74,16 +78,31 @@ const ProductCard = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="space-y-1">
-                    {product.originalPrice && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="line-through">{formatCurrency(product.originalPrice)}</span>
-                        <span className="font-semibold uppercase tracking-wide text-accent">Limited offer</span>
-                      </div>
+                  <div className="space-y-2">
+                    {product.originalPrice ? (
+                      <>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="text-base text-muted-foreground line-through">
+                            {formatCurrency(product.originalPrice)}
+                          </span>
+                          <span className="text-3xl font-headline font-semibold text-primary">
+                            {formatCurrency(product.price)}
+                          </span>
+                          {badgeText ? (
+                            <span className="rounded-md bg-accent px-2 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+                              {badgeText}
+                            </span>
+                          ) : null}
+                        </div>
+                        {savingsText ? (
+                          <p className="text-sm text-muted-foreground">{savingsText}</p>
+                        ) : null}
+                      </>
+                    ) : (
+                      <p className="text-3xl font-headline font-semibold text-primary">
+                        {formatCurrency(product.price)}
+                      </p>
                     )}
-                    <p className="text-3xl font-headline font-semibold text-primary">
-                      {formatCurrency(product.price)}
-                    </p>
                   </div>
                 </div>
 
