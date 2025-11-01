@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import martialArtsImage from "@/assets/action-martial-arts.jpg";
-import basketballImage from "@/assets/action-basketball.jpg";
+import contactDrillImage from "@/assets/pivot_guard.jpg";
+import basketballDrillImage from "@/assets/pivot_guard_basketball.jpg";
 
 const ActionGallery = () => {
   return (
@@ -19,24 +19,24 @@ const ActionGallery = () => {
         <div className="grid gap-3 md:grid-cols-2">
           <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
-              src={martialArtsImage}
-              alt="Martial Arts: control & impact drills"
+              src={contactDrillImage}
+              alt="Martial arts and contact control drill using Pivot Guard"
               className="h-full w-full object-cover"
               loading="lazy"
             />
             <figcaption className="px-4 py-3 text-sm text-muted-foreground">
-              Martial Arts: control & impact drills
+              Martial arts / contact control: stay mobile while absorbing impact
             </figcaption>
           </figure>
           <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
-              src={basketballImage}
-              alt="Basketball/Flag Football: simulate contact"
+              src={basketballDrillImage}
+              alt="Basketball contact drill with Pivot Guard in the lane"
               className="h-full w-full object-cover"
               loading="lazy"
             />
             <figcaption className="px-4 py-3 text-sm text-muted-foreground">
-              Basketball/Flag Football: simulate contact
+              Basketball drive drill: simulate contact and finish through pressure
             </figcaption>
           </figure>
         </div>

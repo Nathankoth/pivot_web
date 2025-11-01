@@ -1,4 +1,4 @@
-import productImage from "@/assets/product-square.jpg";
+import productImage from "@/assets/pivot_pad.jpg";
 
 export const pivotGuardProduct = {
   sku: "PG-STD-BLK",

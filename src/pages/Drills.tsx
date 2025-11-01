@@ -1,16 +1,16 @@
-import martialArtsImage from "@/assets/action-martial-arts.jpg";
-import sportsImage from "@/assets/action-basketball.jpg";
+import contactDrillImage from "@/assets/pivot_guard.jpg";
+import basketballDrillImage from "@/assets/pivot_guard_basketball.jpg";
 
 const drills = [
   {
     title: "Basketball: Drive vs Contact Simulation",
-    media: sportsImage,
+    media: basketballDrillImage,
     level: "Intermediate",
     description: "Build confidence attacking the lane with controlled contact and finish through pressure.",
   },
   {
     title: "Martial Arts: Pad Kick Control",
-    media: martialArtsImage,
+    media: contactDrillImage,
     level: "All levels",
     description: "Improve striking accuracy and reaction timing while protecting training partners.",
   },
