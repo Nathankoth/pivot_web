@@ -52,12 +52,14 @@ const BuyNow = () => {
         <div className="space-y-6 rounded-lg border border-border bg-card p-6 shadow-card">
           <h2 className="text-xl font-headline font-semibold text-primary">Product summary</h2>
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            <img
-              src={product.image}
-              alt={`${product.title} preview`}
-              className="h-32 w-32 rounded-md object-cover"
-              loading="lazy"
-            />
+            <div className="aspect-square w-32 overflow-hidden rounded-md bg-secondary">
+              <img
+                src={product.image}
+                alt={`${product.title} preview`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
               <div className="flex flex-1 flex-col gap-2">
               <h3 className="text-lg font-semibold text-primary">{product.title}</h3>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">SKU: {product.sku}</p>

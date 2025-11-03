@@ -52,7 +52,7 @@ const ProductCard = () => {
         <Card className="mx-auto max-w-4xl border border-border bg-card shadow-card">
           <CardContent className="p-6 md:p-8">
             <div className="grid gap-8 md:grid-cols-2">
-              <div className="relative overflow-hidden rounded-lg bg-secondary">
+              <div className="relative aspect-square overflow-hidden rounded-lg bg-secondary">
                 <img
                   src={product.image}
                   alt="Pivot Guard product photograph"

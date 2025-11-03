@@ -46,12 +46,14 @@ const Cart = () => {
           <div className="space-y-4">
             {items.map((item) => (
               <article key={item.sku} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-4 shadow-card md:flex-row md:items-start">
-                <img
-                  src={item.image ?? pivotGuardProduct.image}
-                  alt={`${item.title} product image`}
-                  className="h-28 w-28 rounded-md object-cover"
-                  loading="lazy"
-                />
+                <div className="aspect-square w-28 overflow-hidden rounded-md bg-secondary">
+                  <img
+                    src={item.image ?? pivotGuardProduct.image}
+                    alt={`${item.title} product image`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
 
                 <div className="flex flex-1 flex-col gap-3">
                   <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
