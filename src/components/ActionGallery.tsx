@@ -17,7 +17,7 @@ const ActionGallery = () => {
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
-          <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+          <figure className="aspect-video overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
               src={contactDrillImage}
               alt="Martial arts and contact control drill using Pivot Guard"
@@ -28,7 +28,7 @@ const ActionGallery = () => {
               Martial arts / contact control: stay mobile while absorbing impact
             </figcaption>
           </figure>
-          <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+          <figure className="aspect-video overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <img
               src={basketballDrillImage}
               alt="Basketball contact drill with Pivot Guard in the lane"

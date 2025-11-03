@@ -29,7 +29,9 @@ const Drills = () => {
       <section className="container-custom grid gap-6 md:grid-cols-2">
         {drills.map((drill) => (
           <article key={drill.title} className="flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-card">
-            <img src={drill.media} alt={drill.title} className="h-48 w-full object-cover" loading="lazy" />
+            <div className="aspect-video overflow-hidden">
+              <img src={drill.media} alt={drill.title} className="h-full w-full object-cover" loading="lazy" />
+            </div>
             <div className="flex flex-1 flex-col gap-3 p-5">
               <div className="flex items-center justify-between text-xs uppercase tracking-wide text-muted-foreground">
                 <span>{drill.level}</span>
